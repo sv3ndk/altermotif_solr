@@ -201,7 +201,7 @@
                 enablePositionIncrements="true"
                 />
         <filter class="solr.LowerCaseFilterFactory"/>
-	<filter class="solr.EnglishPossessiveFilterFactory"/>
+	      <filter class="solr.EnglishPossessiveFilterFactory"/>
         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
 	<!-- Optionally you may want to use this less aggressive stemmer instead of PorterStemFilterFactory:
         <filter class="solr.EnglishMinimalStemFilterFactory"/>
@@ -217,7 +217,7 @@
                 enablePositionIncrements="true"
                 />
         <filter class="solr.LowerCaseFilterFactory"/>
-	<filter class="solr.EnglishPossessiveFilterFactory"/>
+      	<filter class="solr.EnglishPossessiveFilterFactory"/>
         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
 	<!-- Optionally you may want to use this less aggressive stemmer instead of PorterStemFilterFactory:
         <filter class="solr.EnglishMinimalStemFilterFactory"/>
@@ -362,7 +362,7 @@
       <analyzer>
         <tokenizer class="solr.WhitespaceTokenizerFactory"/>
         <!--
-        The DelimitedPayloadTokenFilter can put payloads on tokens... for example,
+        The DelimitedPayloadTokenFilter can put payloads on tokens... for example,    
         a token of "foo|1.4"  would be indexed as "foo" with a payload of 1.4f
         Attributes of the DelimitedPayloadTokenFilterFactory : 
          "delimiter" - a one character delimiter. Default is | (pipe)
@@ -421,9 +421,12 @@
 
 
  <fields>
-
+ 
+   <!-- common data to groups and project--> 
    <field name="id" type="string" indexed="true" stored="true" required="true" /> 
+   <field name="data_type" type="string" indexed="true" stored="true" required="true" /> 
 
+   <!-- project data indexed and stored -->
    <field name="prj_name" type="text_general" indexed="true" stored="true" required="false"/>
    <field name="prj_goal" type="text_en" indexed="true" stored="true" required="false"/>
    <field name="prj_description" type="text_en" indexed="true" stored="true" required="false"/>
@@ -431,6 +434,14 @@
    <field name="prj_strategy" type="text_en" indexed="true" stored="true" required="false"/>
    <field name="prj_offer" type="text_en" indexed="true" stored="true" required="false"/>
    <field name="prj_tags" type="text_simpleSplitting" indexed="true" stored="true" required="false"/>
+
+   <!-- project data non indexed: just to be able to display them in the search result page -->
+   <field name="prj_participants" type="int" indexed="false" stored="true" required="false"/>
+   <field name="prj_thumb_bucket" type="string" indexed="false" stored="true" required="false"/>
+   <field name="prj_thumb_key" type="string" indexed="false" stored="true" required="false"/>
+
+
+
    
  </fields>
 

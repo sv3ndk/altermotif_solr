@@ -728,6 +728,7 @@
     <lst name="defaults">
       <str name="echoParams">none</str>
       <int name="rows">20</int>
+      <str name="qf">prj_name^1.5 prj_description prj_goal prj_reason prj_strategy^0.75 prj_offer^0.75 prj_tags prj_fake_field</str> 
     </lst>  
    
     <!-- request parameters appended to those received at query time  -->
@@ -738,8 +739,7 @@
     <!-- request similar to “defaults”, but not overwrittable at query time  -->
     <lst name="invariants">
       <str name="facet">false</str>
-      <str name="defType">dismax</str>
-      <str name="qf">prj_name^1.5 prj_description prj_goal prj_reason prj_strategy^0.75 prj_offer^0.75</str> 
+      <str name="defType">edismax</str>
     </lst>
   </requestHandler>
    

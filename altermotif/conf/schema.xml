@@ -70,6 +70,8 @@
     <!-- A Trie based date field for faster date range queries and date faceting. -->
     <fieldType name="tdate" class="solr.TrieDateField" precisionStep="6" positionIncrementGap="0"/>
 
+    <fieldType name="tdate_last" class="solr.TrieDateField" precisionStep="6" positionIncrementGap="0" sortMissingLast="true"/>
+
 
     <!--
       Note:
@@ -165,7 +167,7 @@
     </fieldType>
 
 
-  <!-- Svend: used for tags-->
+  <!-- Svend: used for tags and themes: we want exact match in these cases: no language analysis required-->
     <fieldType name="text_simpleSplitting" class="solr.TextField" positionIncrementGap="100">
       <analyzer type="index">
         <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -415,16 +417,18 @@
     A Geohash is a compact representation of a latitude longitude pair in a single field.
     See http://wiki.apache.org/solr/SpatialSearch
    -->
-    <fieldtype name="geohash" class="solr.GeoHashField"/>
+
+    <!--fieldtype name="geohash" class="solr.GeoHashField"/-->
+   <fieldType name="geohash" class="solr2155.solr.schema.GeoHashField" length="12" />
              
  </types>
-
 
  <fields>
  
    <!-- common data to groups and project--> 
    <field name="id" type="string" indexed="true" stored="true" required="true" /> 
    <field name="data_type" type="string" indexed="true" stored="true" required="true" /> 
+   <field name="prj_fake_field" type="string" indexed="true" stored="true" required="false" />
 
    <!-- project data indexed and stored -->
    <field name="prj_name" type="text_general" indexed="true" stored="true" required="false"/>
@@ -433,16 +437,20 @@
    <field name="prj_reason" type="text_en" indexed="true" stored="true" required="false"/>
    <field name="prj_strategy" type="text_en" indexed="true" stored="true" required="false"/>
    <field name="prj_offer" type="text_en" indexed="true" stored="true" required="false"/>
-   <field name="prj_tags" type="text_simpleSplitting" indexed="true" stored="true" required="false"/>
+   <field name="prj_tags" type="text_simpleSplitting" indexed="true" stored="true" required="false" multiValued="true"/>
+   <field name="prj_themes" type="text_simpleSplitting" indexed="true" stored="true" required="false" multiValued="true"/>
+   <field name="prj_language_code" type="text_simpleSplitting" indexed="true" stored="true" required="false" />
+   <field name="prj_due_date" type="tdate_last" indexed="true" stored="true" required="false" />
+   <field name="prj_location" type="geohash" indexed="true" stored="true" multiValued="true"/> 
 
    <!-- project data non indexed: just to be able to display them in the search result page -->
    <field name="prj_participants" type="int" indexed="false" stored="true" required="false"/>
    <field name="prj_thumb_bucket" type="string" indexed="false" stored="true" required="false"/>
    <field name="prj_thumb_key" type="string" indexed="false" stored="true" required="false"/>
+   <field name="prj_creation_date" type="tdate" indexed="false" stored="true" required="false" />
+   <field name="prj_location_name" type="string" indexed="false" stored="true" multiValued="true"/> 
 
-
-
-   
+  
  </fields>
 
  <uniqueKey>id</uniqueKey>

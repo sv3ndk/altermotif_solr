@@ -428,10 +428,10 @@
    <!-- common data to groups and project--> 
    <field name="id" type="string" indexed="true" stored="true" required="true" /> 
    <field name="data_type" type="string" indexed="true" stored="true" required="true" /> 
-   <field name="prj_fake_field" type="string" indexed="true" stored="true" required="false" />
 
    <!-- project data indexed and stored -->
-   <field name="prj_name" type="text_general" indexed="true" stored="true" required="false"/>
+   <field name="prj_fake_field" type="string" indexed="true" stored="true" required="false" />
+   <field name="prj_name" type="text_en" indexed="true" stored="true" required="false"/>
    <field name="prj_goal" type="text_en" indexed="true" stored="true" required="false"/>
    <field name="prj_description" type="text_en" indexed="true" stored="true" required="false"/>
    <field name="prj_reason" type="text_en" indexed="true" stored="true" required="false"/>
@@ -450,7 +450,22 @@
    <field name="prj_creation_date" type="tdate" indexed="false" stored="true" required="false" />
    <field name="prj_location_name" type="string" indexed="false" stored="true" multiValued="true"/> 
 
-  
+   <!-- group data indexed and stored -->
+   <field name="grp_fake_field" type="string" indexed="true" stored="true" required="false" />
+   <field name="grp_name" type="text_en" indexed="true" stored="true" required="false"/>
+   <field name="grp_description" type="text_en" indexed="true" stored="true" required="false"/>
+   <field name="grp_tags" type="text_simpleSplitting" indexed="true" stored="true" required="false" multiValued="true"/>
+   <field name="grp_themes" type="text_simpleSplitting" indexed="true" stored="true" required="false" multiValued="true"/>
+   <field name="grp_location" type="geohash" indexed="true" stored="true" multiValued="true"/> 
+
+   <!-- group data non indexed: just to be able to display them in the search result page -->
+   <field name="grp_creation_date" type="tdate" indexed="false" stored="true" required="false" />
+   <field name="grp_user_members" type="int" indexed="false" stored="true" required="false"/>
+   <field name="grp_prj_members" type="int" indexed="false" stored="true" required="false"/>
+   <field name="grp_thumb_bucket" type="string" indexed="false" stored="true" required="false"/>
+   <field name="grp_thumb_key" type="string" indexed="false" stored="true" required="false"/>
+   <field name="grp_location_name" type="string" indexed="false" stored="true" multiValued="true"/> 
+
  </fields>
 
  <uniqueKey>id</uniqueKey>

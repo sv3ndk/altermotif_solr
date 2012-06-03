@@ -744,6 +744,32 @@
   </requestHandler>
    
 
+  <requestHandler name="/groups" class="solr.SearchHandler">
+   
+    <!-- default values for the search, potentially overwritten at query time  -->
+    <lst name="defaults">
+      <str name="echoParams">none</str>
+      <int name="rows">20</int>
+      <str name="qf">grp_name^1.5 grp_description grp_tags grp_fake_field</str> 
+    </lst>  
+   
+    <!-- request parameters appended to those received at query time  -->
+    <lst name="appends">
+      <str name="fq">data_type:group</str>
+    </lst>
+   
+    <!-- request similar to “defaults”, but not overwrittable at query time  -->
+    <lst name="invariants">
+      <str name="facet">false</str>
+      <str name="defType">edismax</str>
+    </lst>
+  </requestHandler>
+
+
+
+
+
+
 
   <!-- XML Update Request Handler.  
        
